@@ -55,9 +55,13 @@ def moda(t) -> int:
     return moda
 
 
-def avg(t):
-    pass
+def avg(t) -> float:
+    return round((sum(t) / len(t)), 2)
 
 
-def median(t):
-    pass
+def median(t) -> int:
+    # If odd
+    if len(t) % 2 != 0:
+        return t[(len(t) + 1) // 2]
+    else:
+        return (t[len(t) // 2] + t[(len(t) + 1) // 2]) // 2
