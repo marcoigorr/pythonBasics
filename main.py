@@ -1,16 +1,21 @@
 from find_and_replace import find_and_replace
 from hours_minutes_seconds import get_hours_minutes_seconds
 import calculus
+from password_generator import  gen_pwd
 
 
-def main():
+def main() -> int:
     print('Available programs: \n')
     print('1) find and replace')
     print('2) hours, minutes, seconds')
     print('3) calculus')
+    print('4) password generator')
+    print('0) Exit')
     choice = int(input('\nYour choice -> '))
 
-    if choice == 1:
+    if choice == 0:
+        return 1
+    elif choice == 1:
         assert find_and_replace('The fox', 'fox', 'dog') == 'The dog', 'Failed find_and_replace()'
     elif choice == 2:
         print(get_hours_minutes_seconds(30))
@@ -31,6 +36,10 @@ def main():
         print(f'Most frequent element in {t} is', calculus.moda(t))
         print(f'Average of elements in {t} is', calculus.avg(t))
         print(f'Median of {t} is', calculus.median(t))
+    elif choice == 4:
+        print('Generated password ->', gen_pwd(12))
+
+    return 0
 
 
 if __name__ == '__main__':
