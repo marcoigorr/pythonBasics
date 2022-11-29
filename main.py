@@ -1,7 +1,7 @@
 from find_and_replace import find_and_replace
 from hours_minutes_seconds import get_hours_minutes_seconds
 import calculus
-from password_generator import  gen_pwd
+from password_generator import gen_pwd
 
 
 def main() -> int:
@@ -16,7 +16,14 @@ def main() -> int:
     if choice == 0:
         return 1
     elif choice == 1:
-        assert find_and_replace('The fox', 'fox', 'dog') == 'The dog', 'Failed find_and_replace()'
+        # assert find_and_replace('The fox', 'fox', 'do') == 'The dog', 'Failed find_and_replace()'
+        print(find_and_replace('The pen is on the table', 'pen', 'MADONNA'))
+        print(find_and_replace('The pen is on the table', 'is', 'MARIO'))
+        print(find_and_replace('The fox', 'fox', 'do'))
+        print(find_and_replace('The fox', 'fox', 'dog'))
+        print(find_and_replace('The fox', 'fOx', 'doggo'))
+        print(find_and_replace('The gemma capovilla', 'capovilla', 'd'))
+
     elif choice == 2:
         print(get_hours_minutes_seconds(30))
         print(get_hours_minutes_seconds(60))
