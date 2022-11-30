@@ -60,8 +60,10 @@ def avg(t) -> float:
 
 
 def median(t) -> int:
+    t = sorted(t)
+
     # If odd
     if len(t) % 2 != 0:
-        return t[(len(t) + 1) // 2]
+        return t[(len(t)) // 2]
     else:
-        return (t[len(t) // 2] + t[(len(t) + 1) // 2]) // 2
+        return (t[(len(t) // 2) - 1] + t[(len(t) // 2)]) / 2

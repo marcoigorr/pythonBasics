@@ -18,6 +18,9 @@ def find_and_replace(text, old_text, new_text) -> str:
             # Iterate through lText for len(old_text) times;
             # if the 2nd condition returns false then text does not contain old_text (set verified to false),
             # else get the current value of index "i" and store it in start_index
+            if lText[i:i+len(old_text)] == list(old_text):
+                start_index = i
+            """
             for j in range(len(old_text)):
                 if not verified: break
 
@@ -26,11 +29,11 @@ def find_and_replace(text, old_text, new_text) -> str:
             if verified:
                 start_index = i
                 break
+            """
 
     # Define an empty list which size is equal to the number of elements needed by the new string
     lText = [''] * (len(text) - len(old_text) + len(new_text))
 
-    """
     # Insert original chars until start_index
     for i in range(start_index):
         lText[i] = text[i]
@@ -42,14 +45,7 @@ def find_and_replace(text, old_text, new_text) -> str:
     # Insert remaining chars
     for i in range(len(lText) - start_index - len(new_text)):
         lText[start_index + len(new_text) + i] = text[start_index + len(old_text) + i]
-    """
 
-    for i in range(len(lText)):
-        if i < start_index:
-            lText[i] = text[i]
-        elif i >= start_index and i < start_index + len(new_text):
-            lText[i] = new_text[i - start_index]
-        else:
-            lText[i] = text[i - start_index]
+
 
     return ''.join(lText)

@@ -18,11 +18,7 @@ def main() -> int:
     elif choice == 1:
         # assert find_and_replace('The fox', 'fox', 'do') == 'The dog', 'Failed find_and_replace()'
         print(find_and_replace('The pen is on the table', 'pen', 'MADONNA'))
-        print(find_and_replace('The pen is on the table', 'is', 'MARIO'))
-        print(find_and_replace('The fox', 'fox', 'do'))
-        print(find_and_replace('The fox', 'fox', 'dog'))
-        print(find_and_replace('The fox', 'fOx', 'doggo'))
-        print(find_and_replace('The gemma capovilla', 'capovilla', 'd'))
+        print(find_and_replace('The pen is on the table', 'on', 'MARIO'))
 
     elif choice == 2:
         print(get_hours_minutes_seconds(30))
@@ -35,16 +31,16 @@ def main() -> int:
         print(get_hours_minutes_seconds(91842))
         print(get_hours_minutes_seconds(0))
     elif choice == 3:
-        t = [3, 7, 10, 4, 1, 9, 6, 2, 8]
+        t = [3, 7, 10, 4, 1, 9, 6, 2, 8, 5]
         print(f'Maximum of {t} is', calculus.maximum(t))
         print(f'Minimum of {t} is', calculus.minimum(t))
         print(f'Sum of the elements in {t} is', calculus.sum(t))
         print(f'Product of the elements in {t} is', calculus.prod(t))
         print(f'Most frequent element in {t} is', calculus.moda(t))
         print(f'Average of elements in {t} is', calculus.avg(t))
-        print(f'Median of {t} is', calculus.median(t))
+        print(f'Median of {sorted(t)} is', calculus.median(t))
     elif choice == 4:
-        print('Generated password ->', gen_pwd(12))
+        print('Generated password ->', gen_pwd(16))
 
     return 0
 
