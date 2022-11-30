@@ -50,7 +50,9 @@ def mode(t) -> int:
         else:
             dCounts[t[i]] = 1
 
+    # Find the key with the highest value
     for key in dCounts.keys():
+        # If current key value is the highest in the list of values then it's the mode
         if dCounts[key] == maximum(list(dCounts.values())):
             _mode = key
 
@@ -62,7 +64,9 @@ def avg(t) -> float:
 
 
 def median(t) -> int:
-    # If odd
+    t = sorted(t)
+
+    # If odd; else if even
     if len(t) % 2 != 0:
         return t[(len(t)) // 2]
     else:

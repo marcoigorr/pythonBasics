@@ -4,10 +4,15 @@ from calculus import maximum, minimum, sum, prod, mode, avg, median
 from password_generator import gen_pwd
 
 
-def run(choice, assertion=False):
+def run(choice):
     if choice == 1:
-        print(find_and_replace('The pen is on the table', 'pen', 'MADONNA'))
-        print(find_and_replace('The pen is on the table', 'on', 'MARIO'))
+        print("find_and_replace('The fox', 'fox', 'dog') == 'The dog' ? ", find_and_replace('The fox', 'fox', 'dog') == 'The dog')
+        print("find_and_replace('fox', 'fox', 'dog') == 'dog' ? ", find_and_replace('fox', 'fox', 'dog') == 'dog')
+        print("find_and_replace('Firefox', 'fox', 'dog') == 'Firedog' ? ", find_and_replace('Firefox', 'fox', 'dog') == 'Firedog')
+        print("find_and_replace('foxfox', 'fox', 'dog') == 'dogdog' ? ", find_and_replace('foxfox', 'fox', 'dog') == 'dogdog')
+        print("find_and_replace('The Fox and fox.', 'fox', 'dog') == 'The Fox and dog.' ? ", find_and_replace('The Fox and fox.', 'fox', 'dog') == 'The Fox and dog.')
+        print("find_and_replace('THE FOX AND THE DOG' 'fox', 'dog') == 'THE FOX AND THE DOG' ? ", find_and_replace('THE FOX AND THE DOG', 'fox', 'dog') == 'THE FOX AND THE DOG')
+
     elif choice == 2:
         print(get_hours_minutes_seconds(30))
         print(get_hours_minutes_seconds(60))
@@ -28,9 +33,16 @@ def run(choice, assertion=False):
         print('prod(t) == 840', prod(t) == 840)
         print('round(avg(t), 2) == 3.67 ?', round(avg(t), 2) == 3.67)
         print('median(t) == 3.5 ?', median(t) == 3.5)
-
         print('moda([1, 2, 3, 1, 2, 1, 1, 1, 2]) == 1 ?', mode([1, 2, 3, 1, 2, 1, 1, 1, 2]) == 1)
         print('moda([1, 2, 3, 3, 3, 1, 2, 1, 2, 3, 3, 3]) == 3 ?', mode([1, 2, 3, 3, 3, 1, 2, 1, 2, 3, 3, 3]) == 3)
+
+        import random
+        random.seed(42)
+        t_2 = [3, 7, 10, 4, 1, 9, 6, 2, 8]
+        for _ in range(5):
+            random.shuffle(t_2)
+            print(f't = {t_2}')
+            print('median(t) == 6 ? ', median(t_2) == 6)
 
     elif choice == 4:
         print('len(gen_pwd(7)) == 8 ', len(gen_pwd(7)) == 8)
