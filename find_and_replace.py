@@ -9,27 +9,21 @@ def find_and_replace(text, old_text, new_text) -> str:
         lText[i] = text[i]
 
     # Verify if elements of "old_text" are in the new list "lText" and get start index of "old_text" in "text"
-    for i in range(len(lText)):
-        verified = True
-
-        # Check if characters are equal to the first char of old_text
+    i: int = 0
+    verified = False
+    start_index = None
+    while i < len(lText) and not verified:
+        # Check if char[i] of lText is equal to the first char of old_text
         if lText[i] == old_text[0]:
 
-            # Iterate through lText for len(old_text) times;
-            # if the 2nd condition returns false then text does not contain old_text (set verified to false),
-            # else get the current value of index "i" and store it in start_index
+            # check if list of chars are equal
             if lText[i:i+len(old_text)] == list(old_text):
+                verified = True
                 start_index = i
-            """
-            for j in range(len(old_text)):
-                if not verified: break
+        i += 1
 
-                if not (lText[i + j] == old_text[j]):
-                    verified = False
-            if verified:
-                start_index = i
-                break
-            """
+    if not verified:
+        return f'Error: couldn\'t get start_index '
 
     # Define an empty list which size is equal to the number of elements needed by the new string
     lText = [''] * (len(text) - len(old_text) + len(new_text))
@@ -45,7 +39,5 @@ def find_and_replace(text, old_text, new_text) -> str:
     # Insert remaining chars
     for i in range(len(lText) - start_index - len(new_text)):
         lText[start_index + len(new_text) + i] = text[start_index + len(old_text) + i]
-
-
 
     return ''.join(lText)

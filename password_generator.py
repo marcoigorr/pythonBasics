@@ -16,11 +16,11 @@ def gen_pwd(length) -> str:
     pwd[3] = random.choice(special)
 
     # Get random chars
-    random_chars = random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits + special)
+    random_chars = random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits + special, k=30)
     for i in range(4, length):
         pwd[i] = random.choice(random_chars)
 
-    # Mix chars
+    # Mix chars (optional)
     for j in range(length):
         n1 = random.randint(0, length - 1)
         n2 = random.randint(0, length - 1)
