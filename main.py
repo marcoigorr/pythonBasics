@@ -8,7 +8,11 @@ def main() -> int:
     print('3) calculus')
     print('4) password generator')
     print('0) Exit')
-    choice = int(input('\nYour choice -> '))
+    try:
+        choice = int(input('\nYour choice -> '))
+    except ValueError as e:
+        print('Error:', e)
+        return 1
 
     if 0 >= choice > 4:
         return 1

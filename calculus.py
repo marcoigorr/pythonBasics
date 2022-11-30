@@ -37,31 +37,31 @@ def prod(t) -> int:
     return prod
 
 
-def moda(t) -> int:
-    highest_count: int = 0
+def mode(t) -> int:
+    # Dictionary with frequencies of each element of t
+    dCounts = {}
+    _mode = 0
 
+    # Loop through t
     for i in range(len(t)):
-        element = t[i]
+        # If the element is in dictionary add 1; else set it to 1
+        if t[i] in dCounts:
+            dCounts[t[i]] += 1
+        else:
+            dCounts[t[i]] = 1
 
-        current_count = 0
-        for j in range(len(t)):
-            if t[j] == element:
-                current_count += 1
+    for key in dCounts.keys():
+        if dCounts[key] == maximum(list(dCounts.values())):
+            _mode = key
 
-        if current_count > highest_count:
-            highest_count = current_count
-            moda = element
-
-    return moda
+    return _mode
 
 
 def avg(t) -> float:
-    return round((sum(t) / len(t)), 2)
+    return sum(t) / len(t)
 
 
 def median(t) -> int:
-    t = sorted(t)
-
     # If odd
     if len(t) % 2 != 0:
         return t[(len(t)) // 2]
