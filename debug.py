@@ -2,6 +2,7 @@ from find_and_replace import find_and_replace
 from hours_minutes_seconds import get_hours_minutes_seconds
 from calculus import maximum, minimum, sum, prod, mode, avg, median
 from password_generator import gen_pwd
+from bubble_sort import bubble_sort
 
 
 def run(choice):
@@ -55,6 +56,10 @@ def run(choice):
         print('ascii_lowercase char? ', any(c in pwd for c in ascii_lowercase))
         print('digits char? ', any(d in pwd for d in digits))
         print('special char? ', any(s in pwd for s in special))
+
+    elif choice == 5:
+        print('bubble_sort([2, 0, 4, 1, 3]) == [0, 1, 2, 3, 4] ? ', bubble_sort([2, 0, 4, 1, 3]) == [0, 1, 2, 3, 4])
+        print('bubble_sort([2, 2, 2, 2]) == [2, 2, 2, 2] ? ', bubble_sort([2, 2, 2, 2]) == [2, 2, 2, 2])
 
     else:
         print('Quitting...')
