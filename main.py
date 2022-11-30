@@ -7,6 +7,7 @@ def main() -> int:
     print('2) hours, minutes, seconds')
     print('3) calculus')
     print('4) password generator')
+    print('5) bubble sort')
     print('0) Exit')
     try:
         choice = int(input('\nYour choice -> '))
