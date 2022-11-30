@@ -55,3 +55,6 @@ def run(choice):
         print('ascii_lowercase char? ', any(c in pwd for c in ascii_lowercase))
         print('digits char? ', any(d in pwd for d in digits))
         print('special char? ', any(s in pwd for s in special))
+
+    else:
+        print('Quitting...')
