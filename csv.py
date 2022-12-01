@@ -63,6 +63,8 @@ class CsvStruct:
         for row in self.row_matrix:
             if row[self.dictColumns[column]] == value:
                 return row
+    # Da aggiungere la verifica del campo, se questo permette piú di un risultato (es. sex, age, survived, ...)
+    # allora si potrá mettere come argomento aggiuntivo il numero di risultati (default=tutti)
 
     def to_string(self):
         print(self.dictColumns)
