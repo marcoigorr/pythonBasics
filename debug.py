@@ -6,7 +6,9 @@ from bubble_sort import bubble_sort
 from handshakes import print_handshakes
 from random_shuffle import shuffle
 from merge_list import merge_lists
-from csv import CsvStruct, Element
+from csv import CsvStruct
+
+
 def run(choice):
     if choice == 1:
         print("find_and_replace('The fox', 'fox', 'dog') == 'The dog' ? ", find_and_replace('The fox', 'fox', 'dog') == 'The dog')
@@ -99,7 +101,7 @@ def run(choice):
             Titanic = CsvStruct(file)
             Titanic.to_string()
 
-            print(Titanic.get_row_data(2))
+            print(Titanic.get_row_by_column_value('PassengerId', 1))
 
         file.close()
 
