@@ -6,8 +6,7 @@ from bubble_sort import bubble_sort
 from handshakes import print_handshakes
 from random_shuffle import shuffle
 from merge_list import merge_lists
-
-
+from csv import CsvStruct, Element
 def run(choice):
     if choice == 1:
         print("find_and_replace('The fox', 'fox', 'dog') == 'The dog' ? ", find_and_replace('The fox', 'fox', 'dog') == 'The dog')
@@ -94,6 +93,15 @@ def run(choice):
         assert merge_lists([2, 2, 2], [2, 2, 2]) == [2, 2, 2, 2, 2, 2]
         assert merge_lists([1, 2, 3], []) == [1, 2, 3]
         assert merge_lists([], [1, 2, 3]) == [1, 2, 3]
+
+    elif choice == 9:
+        with open("titanic.csv") as file:
+            Titanic = CsvStruct(file)
+            Titanic.to_string()
+
+            print(Titanic.get_row_data(2))
+
+        file.close()
 
     else:
         print('Quitting...')
