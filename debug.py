@@ -3,6 +3,7 @@ from hours_minutes_seconds import get_hours_minutes_seconds
 from calculus import maximum, minimum, sum, prod, mode, avg, median
 from password_generator import gen_pwd
 from bubble_sort import bubble_sort
+from handshakes import print_handshakes
 
 
 def run(choice):
@@ -60,6 +61,11 @@ def run(choice):
     elif choice == 5:
         print('bubble_sort([2, 0, 4, 1, 3]) == [0, 1, 2, 3, 4] ? ', bubble_sort([2, 0, 4, 1, 3]) == [0, 1, 2, 3, 4])
         print('bubble_sort([2, 2, 2, 2]) == [2, 2, 2, 2] ? ', bubble_sort([2, 2, 2, 2]) == [2, 2, 2, 2])
+
+    elif choice == 6:
+        assert print_handshakes(['Alice', 'Bob']) == 1
+        assert print_handshakes(['Alice', 'Bob', 'Carol']) == 3
+        assert print_handshakes(['Alice', 'Bob', 'Carol', 'David']) == 6
 
     else:
         print('Quitting...')
