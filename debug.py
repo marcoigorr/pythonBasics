@@ -5,6 +5,7 @@ from password_generator import gen_pwd
 from bubble_sort import bubble_sort
 from handshakes import print_handshakes
 from random_shuffle import shuffle
+from merge_list import merge_lists
 
 
 def run(choice):
@@ -85,6 +86,14 @@ def run(choice):
         testData2 = []
         shuffle(testData2)
         assert testData2 == []
+
+    elif choice == 8:
+        assert merge_lists([1, 3, 6], [5, 7, 8, 9]) == [1, 3, 5, 6, 7, 8, 9]
+        assert merge_lists([1, 2, 3], [4, 5]) == [1, 2, 3, 4, 5]
+        assert merge_lists([4, 5], [1, 2, 3]) == [1, 2, 3, 4, 5]
+        assert merge_lists([2, 2, 2], [2, 2, 2]) == [2, 2, 2, 2, 2, 2]
+        assert merge_lists([1, 2, 3], []) == [1, 2, 3]
+        assert merge_lists([], [1, 2, 3]) == [1, 2, 3]
 
     else:
         print('Quitting...')
