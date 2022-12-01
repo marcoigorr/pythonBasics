@@ -29,9 +29,8 @@ class CsvStruct:
         element_data = []
         data = ''
         comma_count = 0
-        row = self.lRows[line]
 
-        for char in row:
+        for char in self.lRows[line]:
             if char == ',':
                 comma_count += 1  # 4
                 if comma_count == 4:
@@ -45,6 +44,8 @@ class CsvStruct:
                     data = ''
             else:
                 data += char
+
+        element_data.append(data)  # final append for Embarked field
 
         return element_data
 
