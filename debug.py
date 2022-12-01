@@ -4,6 +4,9 @@ from calculus import maximum, minimum, sum, prod, mode, avg, median
 from password_generator import gen_pwd
 from bubble_sort import bubble_sort
 from handshakes import print_handshakes
+from random_shuffle import shuffle
+from merge_list import merge_lists
+from csv import CsvStruct
 
 
 def run(choice):
@@ -66,6 +69,41 @@ def run(choice):
         assert print_handshakes(['Alice', 'Bob']) == 1
         assert print_handshakes(['Alice', 'Bob', 'Carol']) == 3
         assert print_handshakes(['Alice', 'Bob', 'Carol', 'David']) == 6
+
+    elif choice == 7:
+        import random
+        random.seed(42)
+        # Perform this test ten times:
+        for i in range(10):
+            testData1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            shuffle(testData1)
+        # Make sure the number of values hasn't changed:
+        assert len(testData1) == 10
+        # Make sure the order has changed:
+        assert testData1 != [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        # Make sure that when re-sorted, all the original values are there:
+        assert sorted(testData1) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        # Make sure an empty list shuffled remains empty:
+        testData2 = []
+        shuffle(testData2)
+        assert testData2 == []
+
+    elif choice == 8:
+        assert merge_lists([1, 3, 6], [5, 7, 8, 9]) == [1, 3, 5, 6, 7, 8, 9]
+        assert merge_lists([1, 2, 3], [4, 5]) == [1, 2, 3, 4, 5]
+        assert merge_lists([4, 5], [1, 2, 3]) == [1, 2, 3, 4, 5]
+        assert merge_lists([2, 2, 2], [2, 2, 2]) == [2, 2, 2, 2, 2, 2]
+        assert merge_lists([1, 2, 3], []) == [1, 2, 3]
+        assert merge_lists([], [1, 2, 3]) == [1, 2, 3]
+
+    elif choice == 9:
+        with open("titanic.csv") as file:
+            Titanic = CsvStruct(file)
+            Titanic.to_string()
+
+            print(Titanic.get_row_by_column_value('PassengerId', 1))
+
+        file.close()
 
     else:
         print('Quitting...')

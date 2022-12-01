@@ -9,6 +9,9 @@ def main() -> int:
     print('4) password generator')
     print('5) bubble sort')
     print('6) handshakes')
+    print('7) random shuffle')
+    print('8) merge lists')
+    print('9) CSV')
     print('0) Exit')
     try:
         choice = int(input('\nYour choice -> '))
@@ -16,7 +19,7 @@ def main() -> int:
         print('Error:', e)
         return 1
 
-    if choice not in range(0, 7):
+    if choice not in range(0, 10):
         return 1
 
     debug.run(choice)
