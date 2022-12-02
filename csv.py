@@ -35,75 +35,56 @@ class Colors:
 
 
 class CsvStruct:
+    c = Colors()
     n_lines = 0
     dictColumns = {}
     dictColumns_reversed = {}
-    lRows = []
     row_matrix = []
 
     def __init__(self, file):
         self.file = file
-        self.first_line = self.file.readline()
-        self.__init_dictionary__(self.first_line)
-        self.__init_dictionary__(self.first_line, reversed=True)
-        self.__init_rows__()
-        self.__init_matrix__()
+        self.__init_dictionaries__()
+        self.__init_row_matrix__()
 
-    def __init_dictionary__(self, first_line, reversed=False):
-        if not reversed:
-            column = ''
-            i = 0
-            for char in first_line:
-                if char == ',':
-                    self.dictColumns[column] = i
-                    i += 1
-                    column = ''
-                else:
-                    column += char
-        else:
-            column = ''
-            i = 0
-            for char in first_line:
-                if char == ',':
-                    self.dictColumns_reversed[i] = column
-                    i += 1
-                    column = ''
-                else:
-                    column += char
-
-    def __init_rows__(self):
-        for row in self.file.readlines():
-            self.lRows.append(find_and_replace(row, '\n', ''))
-            self.n_lines += 1
-
-    def __init_matrix__(self):
-        for i in range(self.n_lines):
-            self.row_matrix.append(self.__get_row_data__(i))
-
-    def __get_row_data__(self, line):
-        element_data = []
-        data = ''
-        comma_count = 0
-
-        for char in self.lRows[line]:
-            if char == ',':
-                comma_count += 1  # 4
-                if comma_count == 4:
-                    data += char
-                else:
-                    if data != '':
-                        # Check if data can be converted to int or float, if True cast data else don't cast
-                        element_data.append(int(data) if data.isdigit() else float(data) if is_float(data) else data)
-                    else:
-                        element_data.append(None)
-
-                    data = ''
+    def __init_dictionaries__(self):
+        column = ''
+        i = 0
+        for char in self.file.readline():
+            if char == ',' or char == '\n':
+                self.dictColumns[column] = i
+                self.dictColumns_reversed[i] = column
+                i += 1
+                column = ''
             else:
-                data += char
+                column += char
 
-        element_data.append(data)  # final append for Embarked field
+    def __init_row_matrix__(self):
+        for row in self.file.readlines():
+            self.n_lines += 1
+            row = find_and_replace(row, '\n', '')
 
-        return element_data
+            row_elements = []
+            element = ''
+            comma_count = 0
+            for char in row:
+                if char == ',':
+                    comma_count += 1  # 4
+                    if comma_count == 4:
+                        element += char
+                    else:
+                        if element != '':
+                            # Check if data can be converted to int or float, if True cast data else don't cast
+                            row_elements.append(int(element) if element.isdigit() else float(element) if is_float(element) else element)
+                        else:
+                            row_elements.append(None)
+
+                        element = ''
+                else:
+                    element += char
+
+            row_elements.append(element)  # final append for Embarked field
+
+            self.row_matrix.append(row_elements)
 
     def get_row_by_column_value(self, column, value):
         # Check instance of value in given column and returns the row
@@ -119,23 +100,23 @@ class CsvStruct:
         return list
 
     def __str__(self):
-        c = Colors()
+        # Add Columns name
         str_columns = f'Columns: '
-
         for i in range(len(self.dictColumns_reversed)):
-            str_columns += f"{c.list_colors[i]} {self.dictColumns_reversed[i]}"
+            str_columns += f"{self.c.list_colors[i]} {self.dictColumns_reversed[i]}"
 
-        out_string = f'{str_columns} {c.END}\n'
+        out_string = f'{str_columns} {self.c.END}\n'
 
+        # Add all the rows
         for row in self.row_matrix:
             length_row = len(row)
             strRow = ''
             for i in range(length_row):
                 if i == length_row - 1:
-                    strRow += f"{c.list_colors[i]} {row[i]}"
+                    strRow += f"{self.c.list_colors[i]} {row[i]}"
                 else:
-                    strRow += f"{c.list_colors[i]} {row[i]}{c.END},"
-            out_string += f"{strRow} {c.END}\n"
+                    strRow += f"{self.c.list_colors[i]} {row[i]}{self.c.END},"
+            out_string += f"{strRow} {self.c.END}\n"
         return out_string
 
 
