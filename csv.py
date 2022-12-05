@@ -97,9 +97,12 @@ class CsvStruct:
         for row in self.row_matrix:
             if row[self.dictColumns[column]] == value:
                 list.append(row)
-        return list
+        return self.__to_string__(list)
 
-    def __str__(self):
+    def __to_string__(self, matrix=None):
+        if matrix is None:
+            matrix = self.row_matrix
+
         # Add Columns name
         str_columns = f'Columns: '
         for i in range(len(self.dictColumns_reversed)):
@@ -108,7 +111,7 @@ class CsvStruct:
         out_string = f'{str_columns} {self.c.END}\n'
 
         # Add all the rows
-        for row in self.row_matrix:
+        for row in matrix:
             length_row = len(row)
             strRow = ''
             for i in range(length_row):
@@ -118,6 +121,9 @@ class CsvStruct:
                     strRow += f"{self.c.list_colors[i]} {row[i]}{self.c.END},"
             out_string += f"{strRow} {self.c.END}\n"
         return out_string
+
+    def __str__(self):
+        self.__to_string__(self.row_matrix)
 
 
 def is_float(element: any) -> bool:
