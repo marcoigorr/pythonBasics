@@ -123,7 +123,7 @@ class CsvStruct:
         return out_string
 
     def __str__(self):
-        self.__to_string__(self.row_matrix)
+        return self.__to_string__()
 
 
 def is_float(element: any) -> bool:

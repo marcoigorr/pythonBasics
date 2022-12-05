@@ -99,7 +99,7 @@ def run(choice):
     elif choice == 9:
         with open("titanic.csv") as file:
             Titanic = CsvStruct(file)
-            # print(Titanic)
+            print(Titanic)
 
             print(Titanic.get_rows_by_column_value('PassengerId', 1))
             print(Titanic.get_rows_by_column_value('Survived', 1))
