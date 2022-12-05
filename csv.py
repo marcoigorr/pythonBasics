@@ -74,7 +74,8 @@ class CsvStruct:
                     else:
                         if element != '':
                             # Check if data can be converted to int or float, if True cast data else don't cast
-                            row_elements.append(int(element) if element.isdigit() else float(element) if is_float(element) else element)
+                            row_elements.append(
+                                int(element) if element.isdigit() else float(element) if is_float(element) else element)
                         else:
                             row_elements.append(None)
 
@@ -86,17 +87,17 @@ class CsvStruct:
 
             self.row_matrix.append(row_elements)
 
-    def get_row_by_column_value(self, column, value):
-        # Check instance of value in given column and returns the row
-        for row in self.row_matrix:
-            if row[self.dictColumns[column]] == value:
-                return row
-
-    def get_rows_by_column_value(self, column, value):
+    def get_rows_by_column_value(self, column, value=None):
         list = []
+
         for row in self.row_matrix:
-            if row[self.dictColumns[column]] == value:
+            if row[self.dictColumns[column]] == value and value is not None:
                 list.append(row)
+            # If value is none append only column element
+            elif value is None:
+                # Append with correct color based on column index
+                list.append(f"{self.c.list_colors[self.dictColumns[column]]}{row[self.dictColumns[column]]}{self.c.END} \n")
+
         return self.__to_string__(list)
 
     def __to_string__(self, matrix=None):
@@ -112,14 +113,18 @@ class CsvStruct:
 
         # Add all the rows
         for row in matrix:
-            length_row = len(row)
-            strRow = ''
-            for i in range(length_row):
-                if i == length_row - 1:
-                    strRow += f"{self.c.list_colors[i]} {row[i]}"
-                else:
-                    strRow += f"{self.c.list_colors[i]} {row[i]}{self.c.END},"
-            out_string += f"{strRow} {self.c.END}\n"
+            if isinstance(row, list):
+                length_row = len(row)
+                strRow = ''
+                for i in range(length_row):
+                    if i == length_row - 1:
+                        strRow += f"{self.c.list_colors[i]} {row[i]}"
+                    else:
+                        strRow += f"{self.c.list_colors[i]} {row[i]}{self.c.END},"
+                out_string += f"{strRow} {self.c.END}\n"
+            else:
+                # Enters here if matrix does not have lists but single elements (e.g. list of names)
+                out_string += f"{row}"
         return out_string
 
     def __str__(self):
