@@ -101,10 +101,17 @@ def run(choice):
             Titanic = CsvStruct(file)
             print(Titanic)
 
-            print(Titanic.get_rows_by_column_value('PassengerId', 1))
-            print(Titanic.get_rows_by_column_value('Survived', 1))
-            print(Titanic.get_rows_by_column_value('Age'))
-            print(Titanic.get_rows_by_column_value('Name'))
+            print(Titanic.get_rows('PassengerId', 1))
+            print(Titanic.get_rows('Survived', 1))
+            print(Titanic.get_rows('Age'))
+            print(Titanic.get_rows('Name'))
+
+            print(Titanic.get_statistic('Survived'))
+            print(Titanic.get_statistic('Pclass'))
+            print(Titanic.get_statistic('Sex'))
+            print(Titanic.get_statistic('Age'))
+            print(Titanic.get_statistic('Embarked'))
+            print(Titanic.get_statistic('Name'))
 
         file.close()
 

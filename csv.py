@@ -87,7 +87,7 @@ class CsvStruct:
 
             self.row_matrix.append(row_elements)
 
-    def get_rows_by_column_value(self, column, value=None):
+    def get_rows(self, column, value=None):
         list = []
 
         for row in self.row_matrix:
@@ -99,6 +99,43 @@ class CsvStruct:
                 list.append(f"{self.c.list_colors[self.dictColumns[column]]}{row[self.dictColumns[column]]}{self.c.END} \n")
 
         return self.__to_string__(list)
+
+    def get_statistic(self, column) -> str:
+        message = f"\nStatistics for column {column}:\n"
+        dict = {}
+
+        split = False
+        if column == 'Name':
+            split = True
+
+        for i in range(self.n_lines):
+            element = self.row_matrix[i][self.dictColumns[column]]
+
+            if split:
+                element = element[1:].split(',')[0]
+
+            try:
+                dict[element] += 1
+            except KeyError as e:
+                dict[element] = 1
+
+        message += dict.__str__() + "\n"
+
+        if column == 'Survived':
+            message += f"{round((dict[0] * 100) / self.n_lines)}% of passengers died ({dict[0]}) \n"
+            message += f"{round((dict[1] * 100) / self.n_lines)}% of passengers survived ({dict[1]})"
+        elif column == 'Sex':
+            message += f"{round((dict['male'] * 100) / self.n_lines)}% of passengers were male ({dict['male']}) \n"
+            message += f"{round((dict['female'] * 100) / self.n_lines)}% of passengers were female ({dict['female']})"
+        elif column == 'Age':
+            for key in dict:
+                message += f"{dict[key]} people that are {key} years old \n"
+        elif column == 'Name':
+            message += f"Most frequent name is: {max(dict)} \n"
+            message += f"Less frequent name is: {min(dict)}"
+
+        return message
+
 
     def __to_string__(self, matrix=None):
         if matrix is None:
